@@ -24,6 +24,8 @@ interface WorldMapProps {
   onToggleDifficulty: () => void;
   onOpenProgress: () => void;
   onBackToWelcome: () => void;
+  onBackToHub?: () => void;
+  onPlayRobotMaze?: () => void;
 }
 
 export const WorldMap: React.FC<WorldMapProps> = ({
@@ -33,6 +35,8 @@ export const WorldMap: React.FC<WorldMapProps> = ({
   onToggleDifficulty,
   onOpenProgress,
   onBackToWelcome,
+  onBackToHub,
+  onPlayRobotMaze,
 }) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50/70 via-purple-50/40 to-pink-50/60 dark:from-slate-950 dark:via-purple-950/20 dark:to-slate-900 text-slate-800 dark:text-slate-100 p-4 sm:p-6 select-none">
@@ -49,6 +53,35 @@ export const WorldMap: React.FC<WorldMapProps> = ({
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
+
+          {onBackToHub && (
+            <button
+              onClick={() => {
+                soundEffects.playClick();
+                onBackToHub();
+              }}
+              className="px-2.5 py-1.5 rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 font-bold text-xs hover:bg-purple-100 transition-all flex items-center gap-1"
+              title="Return to Dual Realm Hub"
+            >
+              <span>🏰×🤖</span>
+              <span className="hidden sm:inline">Hub</span>
+            </button>
+          )}
+
+          {onPlayRobotMaze && (
+            <button
+              onClick={() => {
+                soundEffects.playClick();
+                onPlayRobotMaze();
+              }}
+              className="px-2.5 py-1.5 rounded-xl border border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 font-bold text-xs hover:bg-blue-100 transition-all flex items-center gap-1"
+              title="Switch to Robot Maze"
+            >
+              <span>🤖</span>
+              <span className="hidden md:inline">Robot Maze</span>
+            </button>
+          )}
+
           <div>
             <h1 className="text-base sm:text-xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 dark:from-purple-400 dark:to-indigo-300">
               Kingdom Map

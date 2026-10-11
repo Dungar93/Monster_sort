@@ -15,6 +15,8 @@ interface WelcomeScreenProps {
   onToggleSound: () => void;
   onToggleDifficulty: () => void;
   onOpenProgress: () => void;
+  onBackToHub?: () => void;
+  onPlayRobotMaze?: () => void;
 }
 
 export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
@@ -24,6 +26,8 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
   onToggleSound,
   onToggleDifficulty,
   onOpenProgress,
+  onBackToHub,
+  onPlayRobotMaze,
 }) => {
   const hasSavedProgress = Object.keys(progress.completedLevels).length > 0;
 
@@ -43,7 +47,38 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
         <MonsterSvg monster={GROUND_TRUTH_MONSTERS[5]} size="lg" />
       </div>
 
-      {/* TOP CONTROLS */}
+      {/* TOP LEFT REALM CONTROLS */}
+      <div className="absolute top-4 left-4 sm:top-6 sm:left-6 flex items-center gap-2 z-10">
+        {onBackToHub && (
+          <button
+            onClick={() => {
+              soundEffects.playClick();
+              onBackToHub();
+            }}
+            className="flex items-center gap-1.5 px-3 py-2 rounded-2xl bg-white/90 dark:bg-slate-800/90 shadow-md border border-purple-100 dark:border-purple-800 text-slate-700 dark:text-slate-300 font-bold text-xs hover:scale-105 active:scale-95 transition-all"
+            title="Return to Dual Realm Hub"
+          >
+            <span>🏰×🤖</span>
+            <span className="hidden sm:inline">Realm Hub</span>
+          </button>
+        )}
+
+        {onPlayRobotMaze && (
+          <button
+            onClick={() => {
+              soundEffects.playClick();
+              onPlayRobotMaze();
+            }}
+            className="flex items-center gap-1.5 px-3 py-2 rounded-2xl bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 font-bold text-xs hover:bg-blue-100 transition-all shadow-sm"
+            title="Switch to Robot Maze Challenge"
+          >
+            <span>🤖</span>
+            <span className="hidden sm:inline">Robot Maze</span>
+          </button>
+        )}
+      </div>
+
+      {/* TOP RIGHT CONTROLS */}
       <div className="absolute top-4 right-4 sm:top-6 sm:right-6 flex items-center gap-2 z-10">
         <button
           onClick={onToggleSound}

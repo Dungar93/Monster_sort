@@ -1,17 +1,19 @@
-# Monster Sort: The Sorting Kingdom 🏰✨
+# Discrete Math Adventures: The Dual Realms 🏰✨🤖
 
-**Monster Sort: The Sorting Kingdom** is an interactive, browser-based educational game designed for children aged 7–12 to learn foundational and intermediate concepts of **Discrete Mathematics (Set Theory)** in an engaging fantasy setting.
+Welcome to **Discrete Math Adventures: The Dual Realms**, an interactive educational gaming portal uniting two college Discrete Mathematics projects for children aged 7–12:
 
-Guided by the friendly mentor **Professor Blob**, players help categorize a vibrant population of cute monsters by their properties (color, shape, size, horns, wings, tail, and spots) using Venn diagrams, set partitions, unions, intersections, complements, and set differences.
+1. **🏰 Monster Sort: The Sorting Kingdom** — Set Theory, Venn Diagrams (2-Set & 3-Set), Unions, Intersections, Complements, and Differences with **Professor Blob**.
+2. **🤖 Robot Maze Challenge** — Graph Theory, Vertices & Edges, Paths, and Breadth-First Search (BFS) Shortest Paths with **Robo**.
+3. **🎩 The Discrete Math Sorting Hat (Personality & Aptitude Test)** — An interactive 5-question test that analyzes the player's thinking style, calculates their mathematical archetype, and matches them to their ideal realm!
 
 ---
 
 ## 1. Project Overview
 
-- **Title**: Monster Sort: The Sorting Kingdom
-- **Purpose**: College Discrete Mathematics course project demonstrating set-builder notation, Venn diagram topology, Boolean predicates, and set operations wrapped in a child-friendly pedagogical video game.
+- **Title**: Discrete Math Adventures: The Dual Realms (Monster Sort & Robot Maze)
+- **Purpose**: College Discrete Mathematics project providing an integrated gamified experience covering both **Set Theory** and **Graph Theory**, preceded by an interactive logic personality quiz.
 - **Technology Stack**: Next.js 16 (App Router), React 19, TypeScript (strict type checking), Tailwind CSS, Lucide icons, Canvas Confetti, and native Web Audio API synthesis.
-- **Offline & Zero-Dependencies**: 100% client-side execution; requires no external databases, account registrations, paid APIs, or external audio/image CDNs.
+- **Offline & Zero-Dependencies**: 100% client-side execution; requires no external databases, account registrations, paid APIs, or external asset CDNs. Easily deployable to Vercel with zero configuration.
 
 ---
 
