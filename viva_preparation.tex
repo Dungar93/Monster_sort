@@ -1,0 +1,422 @@
+% Discrete Mathematics (MAL2190) - IIT Jodhpur
+% Project Viva-Voce Defense & Comprehensive Mathematical Reasoning Guide
+% Course: Discrete Mathematics (MAL2190)
+% Group 14: Dungar Soni, Radtiya Saraf, Prakhar Goyal, Arafat, Bhawani
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=0.9in,headheight=15pt]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage[table]{xcolor}
+\usepackage{array,tabularx,longtable,booktabs}
+\usepackage{enumitem}
+\usepackage{fancyhdr,lastpage}
+\usepackage{titlesec}
+\usepackage[hidelinks]{hyperref}
+\usepackage{mdframed}
+
+% Custom Styling & Palette
+\definecolor{primaryblue}{RGB}{24, 76, 120}
+\definecolor{accentteal}{RGB}{0, 128, 128}
+\definecolor{darkcharcoal}{RGB}{33, 37, 41}
+\definecolor{boxbg}{RGB}{245, 248, 252}
+\definecolor{boxborder}{RGB}{180, 205, 230}
+\definecolor{highlightbg}{RGB}{254, 249, 231}
+\definecolor{highlightborder}{RGB}{241, 196, 15}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\renewcommand{\arraystretch}{1.3}
+\setlist{leftmargin=*,itemsep=3pt,topsep=3pt,parsep=0pt}
+
+\titleformat{\section}{\large\bfseries\color{primaryblue}}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{accentteal}}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\small\bfseries\color{darkcharcoal}}{\thesubsubsection}{0.5em}{}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{primaryblue}\textbf{MAL2190: Discrete Mathematics} --- Viva Defense Guide}
+\fancyhead[R]{\small\color{primaryblue}\textbf{Group 14} (IIT Jodhpur)}
+\fancyfoot[L]{\footnotesize Indian Institute of Technology Jodhpur}
+\fancyfoot[R]{\footnotesize Page \thepage\ of \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+
+\newmdenv[
+  backgroundcolor=boxbg,
+  linecolor=boxborder,
+  linewidth=1.2pt,
+  roundcorner=5pt,
+  innertopmargin=8pt,
+  innerbottommargin=8pt,
+  innerleftmargin=10pt,
+  innerrightmargin=10pt,
+  skipabove=8pt,
+  skipbelow=8pt
+]{conceptbox}
+
+\newmdenv[
+  backgroundcolor=highlightbg,
+  linecolor=highlightborder,
+  linewidth=1.2pt,
+  roundcorner=5pt,
+  innertopmargin=8pt,
+  innerbottommargin=8pt,
+  innerleftmargin=10pt,
+  innerrightmargin=10pt,
+  skipabove=8pt,
+  skipbelow=8pt
+]{vivabox}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+
+\begin{document}
+\thispagestyle{plain}
+
+\begin{center}
+  {\Large\bfseries\color{primaryblue} Indian Institute of Technology Jodhpur\par}
+  \vspace{3pt}
+  {\large\bfseries Department of Computer Science \& Engineering\par}
+  \vspace{3pt}
+  {\large\bfseries MAL2190: Discrete Mathematics --- Project Viva-Voce Defense Guide\par}
+  \vspace{8pt}
+  \rule{\textwidth}{1pt}\par
+  \vspace{6pt}
+  {\LARGE\bfseries Logical Rationale, Mathematical Foundations, and Oral Examination Defense Strategy\par}
+  \vspace{4pt}
+  {\large\textit{Dual-Realm Discrete Adventures: Monster Sort \& The Robot Maze Challenge}\par}
+  \vspace{6pt}
+  \rule{\textwidth}{1pt}\par
+  \vspace{10pt}
+\end{center}
+
+\begin{tabularx}{\textwidth}{@{}P{3.5cm}Y P{3.5cm}Y@{}}
+\textbf{Group Number:} & Group 14 & \textbf{Course Code:} & MAL2190 (Discrete Mathematics) \\
+\textbf{Academic Year:} & 2026--2027 & \textbf{Faculty Examiner:} & Course Instructor \\
+\end{tabularx}
+
+\vspace{6pt}
+\textbf{Group Members:}
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item \textbf{Dungar Soni} (B23CS1105) --- Lead Full-Stack Software Architecture \& Systems Integration
+  \item \textbf{Radtiya Saraf} (B23CS1107) --- Theoretical Discrete Mathematics \& Formal Mathematical Proofs
+  \item \textbf{Prakhar Goyal} (B23CS1106) --- Planar Geometric Modeling, SVG Topology \& Grid Graph Physics
+  \item \textbf{Arafat} (B23CS1103) --- Procedural Feature Schemas, Vector Visuals \& Audio Synthesis
+  \item \textbf{Bhawani} (B23CS1104) --- Pedagogical Psychology, Personality Quiz Logic \& Maze Experimentation
+\end{enumerate}
+
+\hrulefill
+
+\section{Logical Rationale: Why This Project? (Selection Logic)}
+
+When the faculty examiner asks: \textit{``What was the logic behind selecting this project, and why did you design it this way?''}, the answer must articulate both **pedagogical necessity** and **mathematical depth**.
+
+\subsection{The Pedagogical Problem with Traditional Discrete Mathematics Teaching}
+Discrete Mathematics is traditionally taught as a collection of disjoint formalisms:
+\begin{enumerate}
+  \item \textbf{Abstract Detachment:} Concepts such as characteristic functions $\chi_A(x)$, Venn partitions, minterm expansions, De Morgan's laws, and graph search invariants are presented via static formulas and truth tables on chalkboards. Students struggle to develop spatial and operational intuition.
+  \item \textbf{Compartmentalization:} Set Theory, Boolean Algebra, and Graph Theory are often taught in isolated textbook chapters. Students rarely realize that \textbf{graph traversal is dynamically equivalent to maintaining partitions of a state space}.
+  \item \textbf{Passive Reception vs.\ Constructivist Discovery:} Under Seymour Papert's \textit{constructionist} educational theory, learners grasp abstract mathematics most effectively when they actively manipulate objects, hypothesize, encounter constraints, and receive immediate deterministic feedback.
+\end{enumerate}
+
+\subsection{Why a Dual-Realm Ecosystem? (Monster Sort + Robot Maze)}
+Rather than building an isolated, trivial puzzle, we created a unified, complementary dual-realm system:
+\begin{itemize}
+  \item \textbf{Monster Sort (The Static, Taxonomic Realm):} Focuses on \textbf{classification, unary predicates, Boolean set algebra, and Venn partitioning}. It answers: \textit{``Given static objects with discrete features, into which unique spatial block of the partition do they belong?''}
+  \item \textbf{Robot Maze (The Dynamic, Algorithmic Realm):} Focuses on \textbf{relations, grid graphs, state-space navigation, and geodesic shortest paths via BFS}. It answers: \textit{``Given a state-space graph, what sequence of discrete relations transitions an agent from source to target with minimal cost?''}
+  \item \textbf{The Sorting Hat Gateway:} Connects the two domains through cognitive profiling. An analytical classifier naturally excels at Boolean feature extraction (Monster Sort), whereas a sequential explorer naturally excels at graph pathfinding (Robot Maze). Profiling students highlights that both paradigms are essential branches of discrete mathematics.
+\end{itemize}
+
+\begin{conceptbox}
+\textbf{The Core Viva Thesis:}
+``Our project demonstrates the fundamental duality of discrete mathematics: \textbf{Monster Sort} explores the \textit{static partition of a universe} using Boolean characteristic predicates, while \textbf{Robot Maze} explores the \textit{dynamic traversal of a graph relation} using Breadth-First Search. Together, they prove that set theory and graph theory are two sides of the same mathematical coin.''
+\end{conceptbox}
+
+\newpage
+\section{Mathematical Reasoning: Realm 1 --- Monster Sort}
+
+\subsection{Formal Modeling of Monsters and Predicates}
+\begin{definition}[Universe of Discourse]
+The monster kingdom is modeled as a finite universal set:
+$$U = \{M_1, M_2, \dots, M_n\}$$
+Each creature $M_j \in U$ is characterized by a 7-dimensional attribute vector:
+$$\vec{f}(M_j) = (\text{color}_j, \text{horns}_j, \text{wings}_j, \text{eyes}_j, \text{shape}_j, \text{pattern}_j, \text{size}_j) \in \mathcal{C} \times \mathcal{H} \times \mathcal{W} \times \mathcal{E} \times \mathcal{S} \times \mathcal{P} \times \mathcal{Z}$$
+\end{definition}
+
+\begin{definition}[Unary Boolean Predicates \& Truth Sets]
+Given $k$ properties of interest, we define $k$ unary predicates $P_i : U \to \{0, 1\}$ for $i \in \{1, \dots, k\}$. Each predicate induces a truth set (subset of $U$):
+$$A_i = \{x \in U \mid P_i(x) = 1\} \subseteq U$$
+The complement $A_i^c = U \setminus A_i = \{x \in U \mid P_i(x) = 0\}$ contains all creatures lacking property $i$.
+\end{definition}
+
+\subsection{Characteristic Indicator Functions \& Boolean Isomorphism}
+The mathematical foundation of Monster Sort relies on the **Characteristic Function**:
+$$\chi_{A_i}(x) = \begin{cases} 1, & \text{if } x \in A_i \\ 0, & \text{if } x \notin A_i \end{cases}$$
+This establishes a rigorous algebraic isomorphism between the power set Boolean algebra $(\mathcal{P}(U), \cup, \cap, {}^c, \emptyset, U)$ and the bit-vector algebra $(\{0, 1\}^U, \lor, \land, \neg, \mathbf{0}, \mathbf{1})$:
+\begin{align*}
+\chi_{A \cap B}(x) &= \chi_A(x) \land \chi_B(x) = \chi_A(x) \cdot \chi_B(x) \\
+\chi_{A \cup B}(x) &= \chi_A(x) \lor \chi_B(x) = \chi_A(x) + \chi_B(x) - \chi_A(x)\chi_B(x) \\
+\chi_{A^c}(x) &= \neg \chi_A(x) = 1 - \chi_A(x) \\
+\chi_{A \setminus B}(x) &= \chi_{A \cap B^c}(x) = \chi_A(x)(1 - \chi_B(x))
+\end{align*}
+
+\subsection{Venn Diagram Topology and Minterm Partitions}
+\begin{definition}[Minterm / Atom of Boolean Algebra]
+For $k$ sets $A_1, \dots, A_k$, each binary vector $\vec{b} = (b_1, \dots, b_k) \in \{0, 1\}^k$ uniquely identifies a fundamental minterm set:
+$$M_{\vec{b}} = \bigcap_{i=1}^k A_i^{(b_i)} \quad \text{where} \quad A_i^{(b_i)} = \begin{cases} A_i, & \text{if } b_i = 1 \\ A_i^c, & \text{if } b_i = 0 \end{cases}$$
+\end{definition}
+
+\begin{theorem}[Venn Partition Theorem]
+The family $\mathcal{M} = \{M_{\vec{b}} \mid \vec{b} \in \{0, 1\}^k\}$ forms a strict mathematical partition of $U$:
+\begin{enumerate}
+  \item \textbf{Pairwise Disjointness:} For all $\vec{b} \neq \vec{c}$, $M_{\vec{b}} \cap M_{\vec{c}} = \emptyset$.
+  \item \textbf{Exhaustive Covering:} $\bigcup_{\vec{b} \in \{0, 1\}^k} M_{\vec{b}} = U$.
+  \item \textbf{Unique Assignment:} Every element $x \in U$ belongs to exactly one minterm $M_{\vec{b}(x)}$ where $\vec{b}(x) = (\chi_{A_1}(x), \dots, \chi_{A_k}(x))$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}[Proof Sketch for Examiner]
+\textbf{1. Disjointness:} If $\vec{b} \neq \vec{c}$, they differ at some coordinate $j$ ($b_j = 1, c_j = 0$). Then $M_{\vec{b}} \subseteq A_j$ and $M_{\vec{c}} \subseteq A_j^c$. Since $A_j \cap A_j^c = \emptyset$, their intersection is empty: $M_{\vec{b}} \cap M_{\vec{c}} = \emptyset$.
+
+\textbf{2. Covering:} For any $x \in U$, by the Law of Excluded Middle, either $x \in A_i$ or $x \in A_i^c$ for each $i$. Setting $b_i = \chi_{A_i}(x)$ yields an index $\vec{b}^*$ such that $x \in M_{\vec{b}^*}$. Since $M_{\vec{b}^*} \subseteq \bigcup M_{\vec{b}}$, $U = \bigcup M_{\vec{b}}$.
+
+\textbf{3. Uniqueness:} If $x$ belonged to two different minterms, their intersection would contain $x$, contradicting pairwise disjointness.
+\end{proof}
+
+\subsection{Why the Universal Canvas is Mathematically Mandatory}
+In traditional classroom Venn diagrams, students frequently ignore the space outside the circles. Mathematically:
+$$\mathcal{R}_0 = M_{(0,0,\dots,0)} = \bigcap_{i=1}^k A_i^c = \left(\bigcup_{i=1}^k A_i\right)^c$$
+Without the outer bounding canvas, $\bigcup_{\vec{b} \neq \vec{0}} M_{\vec{b}} \neq U$ whenever there exist elements outside the union, violating the definition of a partition. In Monster Sort, any creature with $\vec{b}(x) = \vec{0}$ must be placed in the outer canvas, reinforcing the **Principle of the Universal Complement**.
+
+\subsection{De Morgan's Laws and Planar Topological Limits}
+\begin{itemize}
+  \item \textbf{De Morgan's Duality:} In World 4 (Mirror Peaks), players solve expressions like $(A \cup B)^c$. The game proves $(A \cup B)^c = A^c \cap B^c$ by verifying that dragging creatures into the region satisfying $\neg(P_A \lor P_B)$ selects identical bitmasks as $(1 - P_A) \land (1 - P_B)$.
+  \item \textbf{Topological Limit (Grünbaum / Venn Theorem):} In the plane, 3 circles can form all $2^3 = 8$ connected regions. However, for $k = 4$, circular curves can produce at most 14 regions ($r \le n^2 - n + 2$), which is strictly less than $2^4 = 16$. This explains why World 3 caps standard circular Venn diagrams at $k=3$ before introducing higher-order compound predicate chambers.
+\end{itemize}
+
+\newpage
+\section{Mathematical Reasoning: Realm 2 --- The Robot Maze Challenge}
+
+\subsection{Graph-Theoretic Formalization of Mazes}
+A visual maze is mathematically formalized as an **unweighted undirected planar graph** $G = (V, E)$:
+\begin{definition}[Grid Graph Representation]
+Given a 2D lattice of dimensions $R \times C$:
+\begin{itemize}
+  \item \textbf{Vertex Set $V$:} Every open (walkable) cell $(r, c)$ constitutes a vertex:
+  $$V = \{(r, c) \in \{0, \dots, R-1\} \times \{0, \dots, C-1\} \mid \text{maze}[r][c] \neq \text{`\#'}\}$$
+  \item \textbf{Edge Set $E$:} An edge joins two vertices if and only if they are orthogonal unit neighbors (Manhattan distance 1):
+  $$E = \{(u, v) \in V \times V \mid u = (r, c), v = (r', c'), \ |r - r'| + |c - c'| = 1\}$$
+\end{itemize}
+\end{definition}
+
+\begin{lemma}[The Handshake Lemma in Grid Graphs]
+For every maze level:
+$$\sum_{v \in V} \operatorname{deg}(v) = 2|E|$$
+Each interior cell has degree $\operatorname{deg}(v) \le 4$, edge cells $\le 3$, and corner cells $\le 2$. Walls act as induced subgraph vertex deletions ($G' = G[V \setminus V_{\text{obs}}]$).
+\end{lemma}
+
+\subsection{State-Space Representation and Geodesic Shortest Path}
+\begin{definition}[Path and Geodesic Distance]
+A path $\pi$ of length $L$ from start vertex $s = (r_0, c_0)$ to destination $d = (r_g, c_g)$ is a sequence of vertices:
+$$\pi = \langle v_0, v_1, \dots, v_L \rangle \quad \text{such that } v_0 = s, \ v_L = d, \ \text{and } (v_i, v_{i+1}) \in E \ \forall i$$
+The **geodesic distance** $\delta(s, d)$ is defined as:
+$$\delta(s, d) = \begin{cases} \min \{L \mid \text{there exists a path } \pi \text{ of length } L \text{ from } s \text{ to } d\} \\ \infty, \quad \text{if no path exists} \end{cases}$$
+\end{definition}
+
+\subsection{Proof of Breadth-First Search (BFS) Optimality}
+\begin{theorem}[BFS Shortest-Path Correctness on Unweighted Graphs]
+On a finite graph $G = (V, E)$ with uniform edge weights $w(e) = 1$, Breadth-First Search initialized at $s$ computes $d[v] = \delta(s, v)$ for all $v \in V$ in $O(|V| + |E|)$ time.
+\end{theorem}
+
+\begin{proof}[Layer Induction Proof (Examiner-Ready)]
+Define distance layers $L_d = \{v \in V \mid \delta(s, v) = d\}$ for $d \ge 0$, where $L_0 = \{s\}$.
+
+\textbf{Induction Hypothesis:} BFS dequeues every vertex in layer $L_d$ before dequeuing any vertex in layer $L_{d+1}$, and records distance $d[v] = d = \delta(s, v)$ for every $v \in L_d$.
+
+\textbf{Base Case ($d=0$):} At start, $Q = \langle s \rangle$ with $d[s] = 0 = \delta(s, s)$. $s$ is dequeued before any other vertex. The base case holds.
+
+\textbf{Inductive Step:} Assume true for layers $0, 1, \dots, d$.
+Consider any vertex $w \in L_{d+1}$. By definition, $w$ has at least one neighbor $v \in L_d$, and $w \notin L_{\le d}$.
+Because $w \notin L_{\le d}$, $w$ has not been discovered prior to processing layer $L_d$.
+When BFS dequeues neighbor $v \in L_d$ (which occurs during layer $d$ processing by induction):
+\begin{enumerate}
+  \item $w$ is undiscovered, so BFS assigns $d[w] = d[v] + 1 = d + 1 = \delta(s, w)$.
+  \item BFS sets $\operatorname{parent}[w] = v$ and enqueues $w$ at the tail of the FIFO queue $Q$.
+\end{enumerate}
+Because $Q$ is First-In-First-Out, all vertices of $L_{d+1}$ are enqueued behind all vertices of $L_d$, and before any vertex discovered from $L_{d+1}$.
+Thus, all vertices in $L_{d+1}$ are dequeued strictly after $L_d$ and strictly before $L_{d+2}$.
+Tracing the parent chain back from $d$ reconstructs an optimal path $\pi^*$ of length exactly $d[d] = \delta(s, d)$.
+\end{proof}
+
+\subsection{Why Plain BFS Fails on Weighted Graphs (The Mud Counterexample)}
+In the interactive lesson (Learn F), we demonstrate what happens if terrain has unequal costs (e.g., mud tiles cost 3 steps, paved tiles cost 1 step).
+\begin{itemize}
+  \item BFS measures **edge count**, not **edge cost**.
+  \item A path with 3 paved steps has total cost $1 + 1 + 1 = 3$.
+  \item A path with 2 muddy steps has total cost $3 + 3 = 6$, yet BFS would mistakenly choose it because $2 < 3$ in hop count!
+  \item This directly teaches students why BFS requires unit-cost edges, motivating **Dijkstra's Algorithm** for weighted graphs.
+\end{itemize}
+
+\subsection{Multiple Shortest Paths and Dynamic Programming}
+In Level 11 (``Many Shortest Paths''), there are multiple distinct paths of minimal length $\delta(s, d) = 14$. The game counts them using Dynamic Programming over the BFS Directed Acyclic Graph (DAG):
+$$\text{numPaths}(v) = \sum_{u \in \operatorname{Adj}(v) \cap L_{d(v)-1}} \text{numPaths}(u) \quad \text{with } \text{numPaths}(s) = 1$$
+This yields exactly 16 shortest paths, illustrating the combinatorial nature of grid DAGs.
+
+\newpage
+\section{The Unifying Mathematical Duality}
+
+The faculty examiner will ask: \textit{``How do these two projects relate mathematically? Why combine them?''}
+
+\subsection{Static Classification vs.\ Dynamic State-Space Search}
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}P{3.5cm}Y Y@{}}
+\toprule
+\textbf{Mathematical Dimension} & \textbf{Monster Sort (Set Theory Realm)} & \textbf{Robot Maze (Graph Theory Realm)} \\
+\midrule
+\textbf{Primitive Objects} & Monsters with feature vectors $\vec{f} \in \mathcal{F}$ & Grid cells as vertices $V \subset \mathbb{Z}^2$ \\
+\textbf{Fundamental Structure} & Predicates $P_i : U \to \{0, 1\}$ and sets $A_i \subseteq U$ & Orthogonal adjacency relation $E \subseteq V \times V$ \\
+\textbf{Core Problem} & \textbf{Partitioning Problem:} Map each element to its unique minterm region in $O(k)$ & \textbf{Optimization Problem:} Find minimum edge sequence $\pi^* = \langle s, \dots, d \rangle$ in $O(|V|+|E|)$ \\
+\textbf{Decision Tool} & Characteristic Bitmask Vector: $\vec{b}(x) \in \{0, 1\}^k$ & FIFO Queue Frontier Expansion: $Q = \langle v_1, \dots, v_m \rangle$ \\
+\textbf{Failure Mode} & Set Constraint Violation (placing $x \notin A$ inside circle $A$) & Obstacle Collision (stepping into $V_{\text{obs}}$) or sub-optimal cycles \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{The Deep Duality: Graph Traversal is Dynamic Set Partitioning}
+At any instantaneous step $t$ of the Breadth-First Search algorithm in Robot Maze, the graph's vertex set $V$ is partitioned into three pairwise disjoint subsets:
+$$V = \operatorname{Visited}^{(t)} \cup \operatorname{Frontier}^{(t)} \cup \operatorname{Unvisited}^{(t)}$$
+\begin{enumerate}
+  \item $\operatorname{Visited}^{(t)}$: Vertices whose shortest distances are permanently resolved.
+  \item $\operatorname{Frontier}^{(t)}$ (the FIFO Queue): Vertices discovered at current wavefront $L_d$ or $L_{d+1}$.
+  \item $\operatorname{Unvisited}^{(t)}$: Vertices whose state is yet to be discovered.
+\end{enumerate}
+Every step of BFS moves a vertex from $\operatorname{Frontier}$ to $\operatorname{Visited}$ and its undiscovered neighbors from $\operatorname{Unvisited}$ to $\operatorname{Frontier}$.
+\textbf{Thus, state-space exploration is mathematically equivalent to iteratively evolving a 3-block set partition of $V$.}
+
+\subsection{The Sorting Hat Cognitive Profiling Algorithm}
+The Sorting Hat questionnaire maps 5 situational questions into cognitive vectors $\vec{s} = (s_{\text{set}}, s_{\text{graph}})$.
+\begin{itemize}
+  \item \textbf{Taxonomic / Categorical Affinity:} Tendency to solve problems by clustering, identifying invariant traits, and filtering (Boolean predicates $\to$ Monster Sort).
+  \item \textbf{Topological / Procedural Affinity:} Tendency to solve problems by chaining sequences, exploring state transitions, and optimizing paths (Graph relations $\to$ Robot Maze).
+  \item \textbf{Dual Mastery:} Balanced scores unlock both realms immediately, demonstrating that computer science mastery requires fluency in both categorical data classification and procedural algorithmic navigation.
+\end{itemize}
+
+\newpage
+\section{Anticipated Viva-Voce Questions \& Model Answers}
+
+This section contains the exact questions the professor (``mam'') is most likely to ask during the project viva, paired with comprehensive, mathematically sound model answers.
+
+\begin{vivabox}
+\textbf{Q1: Why does a Venn diagram with $k$ sets partition space into exactly $2^k$ regions?}
+
+\textbf{Model Answer:}
+``Each set $A_i$ is defined by a unary Boolean predicate $P_i$. By the Law of Excluded Middle, any element $x \in U$ either belongs to $A_i$ ($P_i(x) = 1$) or does not ($P_i(x) = 0$). For $k$ independent predicates, each element has a characteristic bit-vector $\vec{b}(x) = (P_1(x), \dots, P_k(x)) \in \{0, 1\}^k$. By the Rule of Product in combinatorics, the number of distinct binary sequences of length $k$ is $2 \times 2 \times \dots \times 2 = 2^k$. Each bit sequence corresponds to one fundamental minterm intersection $M_{\vec{b}} = \bigcap_{i=1}^k A_i^{(b_i)}$, so there are exactly $2^k$ possible mutually exclusive regions.''
+\end{vivabox}
+
+\begin{vivabox}
+\textbf{Q2: Why can't we draw a standard Venn diagram with 4 circles in the plane?}
+
+\textbf{Model Answer:}
+``This is governed by Venn's Theorem and Branko Gr{\"u}nbaum's geometric investigations. In the Euclidean plane, any two circles intersect in at most 2 points. By planar graph theory and Euler's formula $V - E + F = 2$, $n$ circles in general position can divide the plane into at most $n^2 - n + 2$ connected regions. For $n = 3$, $3^2 - 3 + 2 = 8 = 2^3$, which works. But for $n = 4$, $4^2 - 4 + 2 = 14 < 2^4 = 16$. Two required minterms cannot be geometrically formed using circles. To represent $k=4$, one must use non-convex shapes, ellipses (as John Venn did), or higher-dimensional hypercubes.''
+\end{vivabox}
+
+\begin{vivabox}
+\textbf{Q3: How does Monster Sort demonstrate De Morgan's Laws?}
+
+\textbf{Model Answer:}
+``In World 4 (Mirror Peaks), the game presents expressions such as $(A \cup B)^c$.
+Mathematically, De Morgan's Law states:
+$$(A \cup B)^c = A^c \cap B^c$$
+In the game, a monster is placed into the outer universal realm if it satisfies $\neg(P_A \lor P_B)$. By Boolean truth tables, $\neg(P_A \lor P_B) \equiv \neg P_A \land \neg P_B$. The game engine computes the indicator function $\chi_{(A \cup B)^c}(x) = 1 - \max(\chi_A(x), \chi_B(x))$ and confirms it evaluates to 1 if and only if $(1 - \chi_A(x)) \cdot (1 - \chi_B(x)) = 1$. The visual interface highlights both representations as identical target chambers.''
+\end{vivabox}
+
+\begin{vivabox}
+\textbf{Q4: In Robot Maze, why does Breadth-First Search guarantee the shortest path while Depth-First Search (DFS) does not?}
+
+\textbf{Model Answer:}
+``BFS explores vertices in strictly increasing order of distance using a FIFO queue. It processes all vertices at distance $d$ (layer $L_d$) before visiting any vertex at distance $d+1$. Therefore, the very first time the destination vertex $d$ is discovered, the path leading to it is guaranteed to have minimal edge count $\delta(s, d)$. In contrast, DFS uses a LIFO stack (or recursion) and explores deep down a single branch. DFS will follow arbitrary corridors and can reach the goal via a highly convoluted, circuitous path of length $L \gg \delta(s, d)$ before backtracking, failing to guarantee shortest path length.''
+\end{vivabox}
+
+\begin{vivabox}
+\textbf{Q5: Why does BFS fail to find the shortest path if grid tiles have different traversal costs?}
+
+\textbf{Model Answer:}
+``The correctness proof of BFS relies fundamentally on the **Unit Cost Axiom**: every edge has weight $w(e) = 1$. This ensures that number of edge hops equals total path cost. If a grid contains mud tiles with weight $w = 3$ and road tiles with weight $w = 1$, a 2-hop mud path has cost $3 + 3 = 6$, while a 3-hop road path has cost $1 + 1 + 1 = 3$. Standard BFS only counts hops, so it would dequeue the 2-hop mud path first, which is suboptimal. For non-uniform non-negative edge costs, one must generalize BFS to **Dijkstra's Algorithm** using a priority queue indexed by cumulative distance.''
+\end{vivabox}
+
+\begin{vivabox}
+\textbf{Q6: What is the time and space complexity of both games' core algorithms?}
+
+\textbf{Model Answer:}
+``\textbf{1. Monster Sort Placement:} For $k$ predicates and $|U|$ monsters, extracting features and evaluating the $k$-bit characteristic vector takes $O(k)$ time per monster. Direct table lookup to the target minterm is $O(1)$. Total verification time for a level is $O(k \cdot |U|)$. Space complexity is $O(2^k + |U|)$ to store the $2^k$ regions and monster attributes.
+\textbf{2. Robot Maze BFS:} On an $R \times C$ maze graph $G=(V, E)$, $|V| \le RC$ and $|E| < 2RC$. Each vertex is enqueued and dequeued at most once ($O(|V|)$ operations). For each dequeued vertex, its orthogonal neighbors (at most 4) are inspected ($O(|E|)$ operations). Thus, time complexity is $O(|V| + |E|) = O(RC)$. Space complexity is $O(|V|)$ to store the visited boolean array, parent pointers, and FIFO queue.''
+\end{vivabox}
+
+\begin{vivabox}
+\textbf{Q7: How did you implement the queue in Robot Maze to ensure $O(1)$ operations?}
+
+\textbf{Model Answer:}
+``In JavaScript, using `Array.prototype.shift()` to dequeue from the front takes $O(n)$ time because it re-indexes every remaining element in memory, degrading total BFS time from $O(V)$ to $O(V^2)$. To prevent this, in `js/bfs.js`, we implemented the queue as an array with an advancing `head` index pointer. Dequeueing simply reads `queue[head++]`, which is strictly $O(1)$ in time. This guarantees that our browser implementation maintains the theoretical $O(|V| + |E|)$ asymptotic complexity.''
+\end{vivabox}
+
+\begin{vivabox}
+\textbf{Q8: How does the game verify the Handshake Lemma?}
+
+\textbf{Model Answer:}
+``By Euler's Handshake Lemma, for any undirected graph, $\sum_{v \in V} \operatorname{deg}(v) = 2|E|$. In our automated test suite (`tests/run-tests.js`), we iterate over every open cell in each of the 12 levels, compute its degree using orthogonal neighbor checks (`getNeighbors()`), sum the degrees across all vertices, and independently count the bidirectional edges in `listEdges()`. The test programmatically asserts that the sum of degrees is exactly equal to twice the total edge count for all levels, proving graph structural consistency.''
+\end{vivabox}
+
+\begin{vivabox}
+\textbf{Q9: In Monster Sort, what is the role of the benchmark dataset from Section 10?}
+
+\textbf{Model Answer:}
+``Section 10 defines a canonical ground-truth test suite on universe $U = \{M_1, \dots, M_6\}$ with predicates Red ($R$), Horns ($H$), and Wings ($W$). It rigorously validates all Boolean set operators:
+\begin{itemize}
+  \item Intersection: $R \cap H = \{M_1, M_6\}$
+  \item Union: $R \cup H = \{M_1, M_2, M_3, M_6\}$
+  \item Complement: $U \setminus R = \{M_2, M_4, M_5\}$
+  \item Set Difference: $R \setminus H = \{M_3\}$
+  \item Triple Intersection: $R \cap H \cap W = \{M_6\}$
+  \item Compound Difference: $(R \cup H) \setminus W = \{M_1\}$
+  \item Universal Complement: $(R \cup H \cup W)^c = \{M_4\}$
+\end{itemize}
+Our Vitest test suite runs automated assertions verifying that our game engine's set operations match these exact outputs with zero discrepancies.''
+\end{vivabox}
+
+\begin{vivabox}
+\textbf{Q10: What is a Cut Vertex in Robot Maze, and how does it relate to graph connectivity?}
+
+\textbf{Model Answer:}
+``In graph theory, a cut vertex (or articulation point) is a vertex whose removal increases the number of connected components of graph $G$. In the Robot Maze 'Math Detective' lab (Experiment 3), students place wall obstacles on single-width corridors. If that corridor cell is a cut vertex separating start $s$ and destination $d$, its removal disconnects $G$ into two disjoint components $G_1$ and $G_2$ with $s \in G_1$ and $d \in G_2$. BFS exploration terminates with an empty queue, returning $\delta(s, d) = \infty$. This visually demonstrates vertex connectivity and network reliability.''
+\end{vivabox}
+
+\begin{vivabox}
+\textbf{Q11: How does the Principle of Inclusion-Exclusion (PIE) relate to Monster Sort?}
+
+\textbf{Model Answer:}
+``Because the $2^k$ minterms form a pairwise disjoint partition of the universe, the size of any compound set $S$ is strictly the sum of the cardinalities of its constituent minterms: $|S| = \sum_{\vec{b} \in \mathcal{I}_S} |M_{\vec{b}}|$. For the union of three sets $R, H, W$:
+$$|R \cup H \cup W| = |R| + |H| + |W| - (|R \cap H| + |R \cap W| + |H \cap W|) + |R \cap H \cap W|$$
+This algebraic formula arises directly from the fact that overlapping regions are counted multiple times in the sum $|R| + |H| + |W|$ and must be compensated by alternating subtractions and additions. In Monster Sort, counting monsters inside the Venn rings visually demonstrates why PIE is true.''
+\end{vivabox}
+
+\begin{vivabox}
+\textbf{Q12: What were the individual technical and mathematical contributions of each member?}
+
+\textbf{Model Answer:}
+\begin{itemize}
+  \item \textbf{Dungar Soni (B23CS1105):} Lead Full-Stack Architect; designed the Next.js 16/React 19 game engine, state machines, drag-and-drop mechanics, Vercel deployment, and GitHub pipeline.
+  \item \textbf{Radtiya Saraf (B23CS1107):} Theoretical Lead; authored formal proofs for the Venn Partition Theorem and BFS Geodesic Optimality, and formalized characteristic vector mathematics.
+  \item \textbf{Prakhar Goyal (B23CS1106):} Geometric Modeling; computed planar SVG clipping masks and coordinates for the 8 Venn regions, and modeled grid graph adjacency and wall collision physics.
+  \item \textbf{Arafat (B23CS1103):} Asset & Audio Engineering; created the 7-attribute monster schema, vector SVG artwork, procedural Web Audio tone synthesis, and accessible CSS styling.
+  \item \textbf{Bhawani (B23CS1104):} Pedagogical Logic & Experiments; created the Sorting Hat personality quiz scoring algorithm, Robot Race gameplay, and designed the school outreach lesson plan.
+\end{itemize}
+\end{vivabox}
+
+\end{document}
