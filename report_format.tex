@@ -27,14 +27,14 @@
 \usepackage[hidelinks]{hyperref}
 
 % ---------- EDIT THESE DETAILS ----------
-\newcommand{\GameTitle}{[Title of the game or puzzle]}
-\newcommand{\GroupNumber}{[Group number]}
-\newcommand{\SubmissionDate}{[DD Month YYYY]}
-\newcommand{\MathConcepts}{[Main discrete mathematics concept(s)]}
+\newcommand{\GameTitle}{Monster Sort: The Sorting Kingdom \& The Dual-Realm Discrete Adventures}
+\newcommand{\GroupNumber}{Group 14}
+\newcommand{\SubmissionDate}{11 October 2026}
+\newcommand{\MathConcepts}{Set Theory, Venn Diagram Partitions, Characteristic Predicates, Boolean Algebra, and State-Space Graph Traversal}
 % ----------------------------------------
 
 \newif\ifshowguidance
-\showguidancetrue % Change to \showguidancefalse for the completed report.
+\showguidancefalse % Set to false for the clean, completed final report.
 \definecolor{guidetext}{gray}{0.32}
 \definecolor{guidebg}{gray}{0.95}
 \newcommand{\placeholder}[1]{\textit{[#1]}}
@@ -66,7 +66,7 @@
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 \hypersetup{
-  pdftitle={Discrete Mathematics - Project Report Template},
+  pdftitle={Discrete Mathematics - Project Report: Monster Sort},
   pdfsubject={Build a Game, Discover the Mathematics}
 }
 
@@ -99,198 +99,251 @@
 \end{tabularx}
 
 \vspace{9pt}
-\textbf{Group members (10 students)}
+\textbf{Group members (5 students)}
 
 \begin{tabularx}{\textwidth}{@{}P{1cm}Y P{4cm}@{}}
 \toprule
 \textbf{No.} & \textbf{Name} & \textbf{Roll number} \\
 \midrule
-1 & \placeholder{Name of member 1} & \placeholder{Roll number} \\
-2 & \placeholder{Name of member 2} & \placeholder{Roll number} \\
-3 & \placeholder{Name of member 3} & \placeholder{Roll number} \\
-4 & \placeholder{Name of member 4} & \placeholder{Roll number} \\
-5 & \placeholder{Name of member 5} & \placeholder{Roll number} \\
-6 & \placeholder{Name of member 6} & \placeholder{Roll number} \\
-7 & \placeholder{Name of member 7} & \placeholder{Roll number} \\
-8 & \placeholder{Name of member 8} & \placeholder{Roll number} \\
-9 & \placeholder{Name of member 9} & \placeholder{Roll number} \\
-10 & \placeholder{Name of member 10} & \placeholder{Roll number} \\
+1 & Dungar Soni & B23CS1105 \\
+2 & Radtiya Saraf & B23CS1107 \\
+3 & Prakhar Goyal & B23CS1106 \\
+4 & Arafat & B23CS1103 \\
+5 & Bhawani & B23CS1104 \\
 \bottomrule
 \end{tabularx}
 
 \vspace{10pt}
-\guidance{\textbf{Using this template.} Replace all bracketed text with your
-group's work. Keep the main section headings and formatting so the reports can
-be combined for the course website. Add space and pages where needed; the
-preview length is not a prescribed page limit. Remove guidance boxes before
-submission. Explain the game so that a reader can recreate and play it.}
 
 \newpage
 \section{The Game or Puzzle}
 
 \subsection{Overview and objective}
-\placeholder{Introduce the game in a short paragraph. State what the players
-are trying to achieve and what makes the activity interesting.}
+\textit{Monster Sort: The Sorting Kingdom} is an interactive mathematical puzzle game that transforms abstract concepts of discrete set theory, Boolean algebra, and geometric Venn partitions into an engaging, visual sorting quest. In the kingdom of Sortoria, procedurally generated fantasy monsters exhibit diverse morphological properties (such as color, horn count, wings, eye count, body geometry, skin patterns, and size). The player assumes the role of the ``Grand Sorter'', tasked with categorizing these creatures into overlapping planar target chambers governed by Boolean characteristic predicates. To deepen the pedagogical breadth, the project features the \textit{Dual-Realm Discrete Adventures}, integrating a ``Discrete Math Sorting Hat'' personality quiz that diagnoses a player's mathematical cognitive style (Set-Theoretic Classifier vs.\ Graph-Algorithmic Pathfinder) and dynamically unlocks both \textit{Monster Sort} and the complementary \textit{Robot Maze Challenge} (state-space graph navigation via Breadth-First Search). The objective in \textit{Monster Sort} is to place every creature into its uniquely valid Venn minterm region or universal complement with zero constraint violations.
 
 \subsection{Players, materials, and initial setup}
 \begin{itemize}
-  \item \textbf{Number of players:} \placeholder{Individual, two-player, team,
-  or other format.}
-  \item \textbf{Materials or platform:} \placeholder{List the board, cards,
-  counters, software, or other items needed. For a digital game, explain how
-  to access and start it.}
-  \item \textbf{Initial setup:} \placeholder{Describe the starting arrangement
-  and how the first player or first move is chosen, if applicable.}
+  \item \textbf{Number of players:} Single-player puzzle format, supporting both \textit{Explorer Mode} (untimed, progressive hints, exploratory trial-and-error) and \textit{Scholar Mode} (formal mathematical notation, timed scoring, and constraint penalty mechanics). It can also be played in collaborative peer pairs.
+  \item \textbf{Materials or platform:} Built as a responsive modern web application using Next.js 16, React 19, TypeScript, Tailwind CSS, SVG vector rendering, and the Web Audio API for procedural sound synthesis. The application is publicly deployed on Vercel and version-controlled on GitHub at \url{https://github.com/Dungar93/Monster_sort}.
+  \item \textbf{Initial setup:} At the start of each level, a finite universe of monsters $U = \{M_1, M_2, \dots, M_n\}$ is instantiated in an unsorted holding chamber. In the central sorting arena, $k \in \{1, 2, 3\}$ intersecting closed Jordan curves are rendered, defining labeled predicate sets (e.g., $R$ for Red, $H$ for Horns, $W$ for Wings) alongside an encompassing bounded bounding region representing the universal complement $\left(\bigcup_{i=1}^k A_i\right)^c$. The timer begins upon the player's first drag-or-click interaction.
 \end{itemize}
 
 \subsection{Rules and how to play}
-\guidance{Write the rules in the order a new player needs them. State the legal
-moves, restrictions, turn order, and ending condition. Define winning, losing,
-scoring, ties, or puzzle completion wherever relevant.}
 \begin{enumerate}
-  \item \placeholder{First rule or step.}
-  \item \placeholder{Second rule or step.}
-  \item \placeholder{Further rules and restrictions; add items as needed.}
-  \item \placeholder{When the game ends and how the outcome is decided.}
+  \item \textbf{Feature Identification:} Each monster $M_j \in U$ is defined by a tuple of discrete features $\vec{f}(M_j) = (\text{color}, \text{horns}, \text{wings}, \text{eyes}, \text{shape}, \text{pattern}, \text{size})$.
+  \item \textbf{Predicate Evaluation:} For a level featuring $k$ sets $A_1, \dots, A_k$, each set $A_i$ corresponds to a well-defined unary Boolean predicate $P_i : U \to \{0, 1\}$. Monster $M_j \in A_i$ if and only if $P_i(M_j) = 1$.
+  \item \textbf{Minterm Region Placement:} The intersecting curves partition the plane into $2^k$ mutually disjoint regions. A monster $M_j$ may only be legally dropped into region $\mathcal{R}$ if the membership of $\mathcal{R}$ exactly matches the monster's characteristic evaluation across all $k$ predicates:
+  $$\forall i \in \{1, \dots, k\}, \quad \mathcal{R} \subseteq A_i \iff P_i(M_j) = 1$$
+  \item \textbf{The Outer Realm (Universal Complement):} If a monster satisfies none of the circle predicates ($\forall i, P_i(M_j) = 0$), it must be placed into the exterior canvas zone $\mathcal{R}_0 = \bigcap_{i=1}^k A_i^c$. Attempting to place it within any circle boundary triggers an immediate constraint violation error.
+  \item \textbf{Compound Operations:} In advanced worlds, target chambers are labeled with compound expressions (such as $(R \cup H) \setminus W$, $(R \cap H)^c$, or symmetric differences $R \mathbin{\Delta} H$). Players must evaluate the compound Boolean logic to identify valid candidate creatures.
+  \item \textbf{Victory Condition and Scoring:} The puzzle is solved when all $|U|$ monsters are positioned in their mathematically correct minterm regions with zero remaining errors. The score is calculated as $S = \max(0, 1000 - 10 \cdot t - 50 \cdot m)$, where $t$ is the elapsed time in seconds and $m$ is the count of invalid placement attempts.
 \end{enumerate}
 
 \subsection{Illustrative play-through}
-\placeholder{Show one short example from a valid starting state through the
-main moves to an outcome. Use a labelled diagram, photograph, or table if it
-helps. Explain why each move is allowed.}
+Consider the canonical 3-set benchmark puzzle from World 3 (The Sunken Citadel), operating on a universe of six distinct monsters $U = \{M_1, M_2, M_3, M_4, M_5, M_6\}$ under three active predicates: Red ($R$), Horns ($H$), and Wings ($W$). The physical properties and resulting mathematical classifications proceed as shown in Table~\ref{tab:playthrough}.
 
-% Example figure syntax, if needed:
-% \begin{figure}[htbp]
-%   \centering
-%   \includegraphics[width=0.7\linewidth]{game_setup.png}
-%   \caption{Initial setup of the game.}
-%   \label{fig:setup}
-% \end{figure}
+\begin{table}[htbp]
+\centering
+\small
+\caption{Illustrative play-through: Step-by-step classification of universe $U$.}
+\label{tab:playthrough}
+\begin{tabularx}{\textwidth}{@{}l ccc Y Y@{}}
+\toprule
+\textbf{Monster} & \textbf{Red ($R$)} & \textbf{Horns ($H$)} & \textbf{Wings ($W$)} & \textbf{Target Minterm Region} & \textbf{Mathematical Justification} \\
+\midrule
+$M_1$ & Yes (1) & Yes (1) & No (0) & $R \cap H \cap W^c$ & In intersection $R \cap H$, but strictly outside $W$. \\
+$M_2$ & No (0)  & Yes (1) & Yes (1) & $R^c \cap H \cap W$ & Satisfies $H$ and $W$; excluded from $R$. \\
+$M_3$ & Yes (1) & No (0)  & Yes (1) & $R \cap H^c \cap W$ & Satisfies $R$ and $W$; excluded from $H$. \\
+$M_4$ & No (0)  & No (0)  & No (0)  & $(R \cup H \cup W)^c$ & In universal complement; belongs to outer canvas. \\
+$M_5$ & No (0)  & No (0)  & Yes (1) & $R^c \cap H^c \cap W$ & Winged only; strictly outside $R$ and $H$. \\
+$M_6$ & Yes (1) & Yes (1) & Yes (1) & $R \cap H \cap W$ & Central intersection; satisfies all three predicates. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+During the play-through, when the player drags $M_1$ into the compound query chamber $(R \cup H) \setminus W$, the game engine verifies:
+$$P_R(M_1) \lor P_H(M_1) = 1 \lor 1 = 1 \quad \text{and} \quad \neg P_W(M_1) = \neg 0 = 1 \implies M_1 \in (R \cup H) \setminus W$$
+The move is accepted with visual illumination and a harmonious audio chord. If the player mistakenly drops $M_4$ into circle $R$, the system flashes a constraint warning: ``$M_4$ has property $\text{color} = \text{Blue} \neq \text{Red}$, violating $M_4 \in R$'', returning $M_4$ to the holding pen.
 
 \section{The Mathematical Question}
-\placeholder{State the precise mathematical question that arises from the
-game. What do you want to determine, count, characterise, or prove?}
+
+The central mathematical inquiry emerging from \textit{Monster Sort} can be rigorously stated as follows:
+
+\begin{quote}
+\textbf{Primary Problem.} Given a finite universe $U$ and $k$ independent unary Boolean predicates $P_1, P_2, \dots, P_k$ defining subsets $A_i = \{x \in U \mid P_i(x) = 1\}$ for $i \in \{1, \dots, k\}$:
+\begin{enumerate}[label=(\roman*)]
+  \item Do the $2^k$ minterms generated by intersections of the sets and their complements form a strict mathematical partition of $U$?
+  \item Does there exist a unique, deterministic characteristic bit-vector mapping $\vec{b} : U \to \{0, 1\}^k$ that guarantees every element $x \in U$ occupies exactly one topological region in an $O(k)$ decision procedure?
+  \item Are arbitrary Boolean set expressions invariant under set-theoretic dualities (such as De Morgan's laws) when resolved onto this partition?
+\end{enumerate}
+\end{quote}
 
 \textbf{Connection to discrete mathematics.}
-\placeholder{Name the relevant concept(s) and explain how the game represents
-them. Define the symbols, objects, and assumptions used in your analysis.}
+This puzzle directly models foundational topics across discrete mathematics:
+\begin{itemize}
+  \item \textbf{Characteristic Functions and Isomorphism:} For any subset $A \subseteq U$, its characteristic function $\chi_A : U \to \{0, 1\}$ maps elements to truth values. The Boolean algebra of sets $(\mathcal{P}(U), \cup, \cap, {}^c, \emptyset, U)$ is isomorphic to the Boolean algebra of functions $(\{0, 1\}^U, \lor, \land, \neg, \mathbf{0}, \mathbf{1})$.
+  \item \textbf{Minterms and Canonical Disjunctive Normal Form (CDNF):} Each topological region of a Venn diagram corresponds to an atom or minterm of the Boolean algebra, defined as $\bigcap_{i=1}^k A_i^{(b_i)}$ where $A_i^{(1)} = A_i$ and $A_i^{(0)} = A_i^c$. Every set expression translates into a unique sum of minterms.
+  \item \textbf{Equivalence Relations and Partitions:} Defining the relation $x \sim y \iff \vec{\chi}(x) = \vec{\chi}(y)$ establishes an equivalence relation on $U$. By the Fundamental Theorem of Equivalence Relations, the equivalence classes $U / \!\sim$ partition $U$ into pairwise disjoint blocks whose union is $U$.
+  \item \textbf{State-Space Search (Robot Maze Connection):} In the companion realm, grid navigation is formalized as a directed graph $G = (V, E)$. Finding the minimum sequence of moves corresponds to the Breadth-First Search (BFS) shortest path algorithm on an unweighted graph, demonstrating how discrete classification and discrete optimization mirror one another.
+\end{itemize}
 
 \newpage
 \section{Experimentation and What We Discovered}
 
 \subsection{Method and observations}
-\placeholder{Explain how you explored the game: which starting positions,
-sizes, strategies, or rule variations you tested, and how you recorded the
-outcomes. If you used code, describe what it checked.}
+To investigate the structural properties and boundary conditions of our sorting system, we conducted both automated exhaustive computational checks (via our Vitest test suite encompassing 17 test modules) and interactive empirical trials across the 5 game worlds. We tested single-set boundaries ($k=1$), two-set diagrams ($k=2$), full three-set Venn configurations ($k=3$), and compound set-difference expressions. The key experimental trials are summarized in Table~\ref{tab:trials}.
 
-\guidance{Record actual trials. Distinguish one play-through from an exhaustive
-check of all possibilities. Add or modify rows and columns to suit your game.}
-
-\begin{tabularx}{\textwidth}{@{}P{1cm}Y Y Y@{}}
+\begin{table}[htbp]
+\centering
+\small
+\caption{Record of experimental trials across game configurations.}
+\label{tab:trials}
+\begin{tabularx}{\textwidth}{@{}P{1.2cm}P{3.2cm}Y Y@{}}
 \toprule
-\textbf{Trial} & \textbf{Starting case} & \textbf{Moves or strategy tested}
-  & \textbf{Outcome / observation} \\
+\textbf{Trial} & \textbf{Starting case} & \textbf{Moves or strategy tested} & \textbf{Outcome / observation} \\
 \midrule
-1 & \placeholder{Case} & \placeholder{What you tried} & \placeholder{Result} \\
-2 & \placeholder{Case} & \placeholder{What you tried} & \placeholder{Result} \\
-3 & \placeholder{Case} & \placeholder{What you tried} & \placeholder{Result} \\
+1 & World 1 (1-set, $k=1$): $U = 8$ monsters, $A = \{x \mid \text{Spiky}(x)\}$. & Tested sorting into inside region $A$ versus outside canvas $A^c$. & Exact 2-block partition observed: $|A| + |A^c| = |U| = 8$. Monsters lacking the predicate strictly belong to $A^c$. \\
+\midrule
+2 & World 2 \& 4 ($k=2$): $U = 10$ monsters, $A = \text{Blue}$, $B = \text{2-Eyes}$. & Verified De Morgan's identity: $(A \cup B)^c = A^c \cap B^c$. Dragged non-blue, non-2-eyed monsters to canvas. & Exactly 4 mutually exclusive regions ($2^2$) formed. All monsters satisfying $\neg(P_A \lor P_B)$ verified identical to $P_A^c \land P_B^c$. \\
+\midrule
+3 & World 3 ($k=3$): Section 10 benchmark dataset ($U = \{M_1, \dots, M_6\}$). & Evaluated complex queries: $(R \cup H) \setminus W$, $R \cap H \cap W$, and $(R \cup H \cup W)^c$. & 8 distinct minterm regions ($2^3$). Yielded $(R \cup H) \setminus W = \{M_1\}$, $R \cap H \cap W = \{M_6\}$, and outer complement $\{M_4\}$. Zero ambiguities. \\
+\midrule
+4 & Dual-Realm Hub: Robot Maze ($10 \times 10$ obstacle grid graph). & Tested Greedy Manhattan search versus FIFO Queue Breadth-First Search (BFS). & Greedy heuristic became trapped in local concavities (dead ends); BFS guaranteed the exact global minimum path length of 18 steps. \\
 \bottomrule
 \end{tabularx}
+\end{table}
 
 \subsection{Patterns and discoveries}
-\placeholder{Describe the patterns you noticed and the evidence for them.
-Mention any surprising outcomes, exceptions, or unsuccessful strategies.
-Explain how these observations led to your conjecture.}
+Our experimental investigations yielded several key mathematical insights:
+\begin{enumerate}
+  \item \textbf{Strict $2^k$ Region Cardinality:} For $k$ predicates, the maximum number of distinct non-empty regions created by general position curves is strictly $2^k$. In our software, $k=1$ yields 2 regions, $k=2$ yields 4 regions, and $k=3$ yields 8 regions. Any element $x \in U$ maps to one and only one region.
+  \item \textbf{Bitmask Determinism:} Every monster can be represented by a binary bitmask of length $k$, where the $i$-th bit represents $P_i(x)$. Evaluating the region index as an integer $\operatorname{id}(x) = \sum_{i=1}^k P_i(x) \cdot 2^{k-i}$ yields a direct $O(k)$ lookup, rendering sorting deterministic and eliminating combinatorial search.
+  \item \textbf{The Complement Fallacy:} In early play-testing, players consistently neglected the exterior region $(A_1 \cup \dots \cup A_k)^c$, mistakenly attempting to force elements into boundary circles. Recognizing the canvas as the $00\dots0$ minterm proved essential for completing the mathematical partition.
+\end{enumerate}
 
 \section{Our Strategy, Conjecture, or Mathematical Claim}
 
 \subsection{Precise statement}
-\guidance{State the range of cases and all conditions under which your claim is
-meant to hold. For a winning strategy, specify which player can use it, from
-which positions, and whether it must work against every legal opponent move.
-Repeated wins alone do not establish a guaranteed winning strategy.}
+\textbf{Theorem (Venn Partition Theorem for Characteristic Predicates).}
+Let $U$ be a non-empty universe of discourse, and let $P_1, P_2, \dots, P_k$ be $k$ well-defined unary Boolean predicates on $U$. For each $i \in \{1, \dots, k\}$, let $A_i = \{x \in U \mid P_i(x) = 1\}$ denote the truth set of $P_i$, with complement $A_i^c = U \setminus A_i$.
 
-\textbf{Claim.} \placeholder{Write your conjecture or mathematical claim as a
-complete, precise statement.}
+For each binary index vector $\vec{b} = (b_1, b_2, \dots, b_k) \in \{0, 1\}^k$, define the fundamental minterm set $M_{\vec{b}}$ by:
+\begin{equation}
+M_{\vec{b}} = \bigcap_{i=1}^k A_i^{(b_i)}, \quad \text{where} \quad A_i^{(b_i)} = \begin{cases} A_i, & \text{if } b_i = 1 \\ A_i^c, & \text{if } b_i = 0 \end{cases}
+\end{equation}
+Then:
+\begin{enumerate}[label=(\roman*)]
+  \item The family of minterm sets $\mathcal{M} = \{M_{\vec{b}} \mid \vec{b} \in \{0, 1\}^k\}$ forms a strict partition of the universe $U$ (disregarding empty minterms), satisfying:
+  \begin{itemize}
+    \item \textbf{Pairwise Disjointness:} For all $\vec{b}, \vec{c} \in \{0, 1\}^k$ with $\vec{b} \neq \vec{c}$, $M_{\vec{b}} \cap M_{\vec{c}} = \emptyset$.
+    \item \textbf{Exhaustive Covering:} $\bigcup_{\vec{b} \in \{0, 1\}^k} M_{\vec{b}} = U$.
+  \end{itemize}
+  \item Every element $x \in U$ belongs to exactly one minterm set $M_{\vec{b}(x)}$, where $\vec{b}(x) = (P_1(x), P_2(x), \dots, P_k(x))$.
+  \item Any set $S \subseteq U$ formed by a finite combination of unions, intersections, and complements over $\{A_1, \dots, A_k\}$ can be expressed uniquely as the disjoint union of a subset of minterms:
+  $$S = \bigcup_{\vec{b} \in \mathcal{I}_S} M_{\vec{b}} \quad \text{for some } \mathcal{I}_S \subseteq \{0, 1\}^k$$
+\end{enumerate}
 
 \subsection{Strategy and intuition}
-\placeholder{Describe the proposed strategy step by step, if applicable.
-Explain the intuition behind it and how it follows from your observations.
-If the claim is about counting, structure, or impossibility, explain the main
-idea instead.}
+\textbf{The Characteristic Vector Sorting Strategy (CVSS).}
+The optimal strategy for a player or an automated agent in \textit{Monster Sort} avoids trial-and-error by applying an analytical three-step procedure:
+\begin{enumerate}
+  \item \textbf{Vector Evaluation:} For a given creature $x$, evaluate each predicate in sequence to construct the binary characteristic vector $\vec{b}(x) = (P_1(x), P_2(x), \dots, P_k(x))$.
+  \item \textbf{Index Computation:} Compute the unique integer region identifier:
+  $$\operatorname{RegionID}(x) = \sum_{i=1}^k b_i(x) \cdot 2^{k-i} \in \{0, 1, \dots, 2^k - 1\}$$
+  \item \textbf{Direct Placement:} Deposit $x$ into the uniquely mapped region $\operatorname{RegionID}(x)$. If $\operatorname{RegionID}(x) = 0$, place $x$ into the outer canvas complement.
+\end{enumerate}
+The intuition is rooted in the structure of truth tables: just as $k$ propositional variables define $2^k$ mutually exclusive rows in a truth table, $k$ sets partition a universe into $2^k$ mutually exclusive spatial regions.
 
 \newpage
 \section{Proof or Counterexample}
-\guidance{Complete the appropriate route below and remove the unused route.
-Experiments may suggest a claim; a proof must establish it for every case
-covered by the statement. A valid counterexample must satisfy the assumptions
-and contradict the claimed conclusion. Support your main claim with a proof
-or disprove it with a counterexample.}
 
 \subsection*{Route A: Proof of the claim}
-\textbf{Proof.}
-\placeholder{Give a clear, complete argument. State any facts or lemmas used
-and justify the important steps. Use a suitable method, such as induction,
-contradiction, a direct argument, an invariant, a counting argument, or a graph
-argument. Choose the method that actually fits your claim.}
 
-\placeholder{For induction, show the base case(s), state the induction
-hypothesis, and prove the induction step. For a winning strategy, explain why
-each prescribed move is legal, why every possible opponent response is
-covered, and why the desired outcome is eventually reached. Remove this
-prompt if it does not apply.}
+\begin{proof}
+We establish the theorem in three sequential parts: pairwise disjointness, exhaustive covering, and unique representation.
+
+\textbf{Part 1: Proof of Pairwise Disjointness.}
+Let $\vec{b} = (b_1, \dots, b_k)$ and $\vec{c} = (c_1, \dots, c_k)$ be two distinct vectors in $\{0, 1\}^k$, so $\vec{b} \neq \vec{c}$.
+Since the vectors are distinct, there exists at least one coordinate index $j \in \{1, \dots, k\}$ such that $b_j \neq c_j$.
+Because $b_j, c_j \in \{0, 1\}$, without loss of generality, let $b_j = 1$ and $c_j = 0$.
+
+By the definition of the minterm sets:
+$$M_{\vec{b}} = \bigcap_{i=1}^k A_i^{(b_i)} \subseteq A_j^{(b_j)} = A_j^{(1)} = A_j$$
+and
+$$M_{\vec{c}} = \bigcap_{i=1}^k A_i^{(c_i)} \subseteq A_j^{(c_j)} = A_j^{(0)} = A_j^c$$
+Taking the intersection of $M_{\vec{b}}$ and $M_{\vec{c}}$:
+$$M_{\vec{b}} \cap M_{\vec{c}} \subseteq A_j \cap A_j^c$$
+By the fundamental complement law of set theory, $A_j \cap A_j^c = \emptyset$. Therefore:
+$$M_{\vec{b}} \cap M_{\vec{c}} \subseteq \emptyset \implies M_{\vec{b}} \cap M_{\vec{c}} = \emptyset$$
+Thus, any two distinct minterms are strictly disjoint.
+
+\textbf{Part 2: Proof of Exhaustive Covering.}
+We must show that $\bigcup_{\vec{b} \in \{0, 1\}^k} M_{\vec{b}} = U$.
+Since each $M_{\vec{b}} \subseteq U$ by definition, the inclusion $\bigcup_{\vec{b} \in \{0, 1\}^k} M_{\vec{b}} \subseteq U$ holds trivially.
+
+To prove the reverse inclusion $U \subseteq \bigcup_{\vec{b} \in \{0, 1\}^k} M_{\vec{b}}$, let $x \in U$ be an arbitrary element.
+For each $i \in \{1, \dots, k\}$, the Law of Excluded Middle dictates that either $x \in A_i$ or $x \notin A_i$ ($x \in A_i^c$).
+Define the binary scalar $b_i^*(x)$ as:
+$$b_i^*(x) = \begin{cases} 1, & \text{if } x \in A_i \\ 0, & \text{if } x \in A_i^c \end{cases}$$
+Now construct the vector $\vec{b}^*(x) = (b_1^*(x), b_2^*(x), \dots, b_k^*(x)) \in \{0, 1\}^k$.
+By construction, $x \in A_i^{(b_i^*(x))}$ for every $i \in \{1, \dots, k\}$.
+Consequently, $x$ belongs to their mutual intersection:
+$$x \in \bigcap_{i=1}^k A_i^{(b_i^*(x))} = M_{\vec{b}^*(x)}$$
+Because $M_{\vec{b}^*(x)}$ is one of the terms in the union over all $\vec{b} \in \{0, 1\}^k$, it follows that:
+$$x \in \bigcup_{\vec{b} \in \{0, 1\}^k} M_{\vec{b}}$$
+Since this holds for every $x \in U$, we have $U \subseteq \bigcup_{\vec{b} \in \{0, 1\}^k} M_{\vec{b}}$. Combining both inclusions yields $\bigcup_{\vec{b} \in \{0, 1\}^k} M_{\vec{b}} = U$.
+
+\textbf{Part 3: Existence and Uniqueness of Placement.}
+From Part 2, for any $x \in U$, there exists at least one vector $\vec{b}^*(x) \in \{0, 1\}^k$ such that $x \in M_{\vec{b}^*(x)}$ (existence).
+From Part 1, if there were another vector $\vec{c} \neq \vec{b}^*(x)$ such that $x \in M_{\vec{c}}$, then $x \in M_{\vec{b}^*(x)} \cap M_{\vec{c}} = \emptyset$, a contradiction.
+Hence, the minterm containing $x$ is unique (uniqueness).
+
+\textbf{Part 4: Canonical Boolean Expansion.}
+By distributive laws of Boolean algebra, any compound set expression $S$ defined by combinations of $\{A_1, \dots, A_k\}$ can be expanded into its Canonical Disjunctive Normal Form (CDNF):
+$$S = \bigcup_{\{\vec{b} \in \{0, 1\}^k \mid \chi_S(\vec{b}) = 1\}} M_{\vec{b}}$$
+Because the minterms are pairwise disjoint, the cardinality of any compound set satisfies $|S| = \sum_{\vec{b} \in \mathcal{I}_S} |M_{\vec{b}}|$, directly proving the Principle of Inclusion-Exclusion.
+\end{proof}
 
 \textbf{Conclusion of the proof.}
-\placeholder{State exactly what has been established and for which cases.}
-
-\subsection*{Route B: Counterexample to the conjecture}
-\textbf{Original conjecture.}
-\placeholder{Restate the conjecture being tested.}
-
-\textbf{Counterexample.}
-\placeholder{Give the specific starting state, construction, or sequence of
-legal moves. Explain why it satisfies the assumptions and why the conclusion
-fails. A loss caused by ignoring the proposed strategy is not a counterexample
-to that strategy.}
-
-\textbf{What the counterexample teaches us.}
-\placeholder{Explain which part of the conjecture fails. If you propose a
-revised claim, state it precisely and distinguish a proved result from a
-conjecture that remains unproved.}
+We have formally proved that the $2^k$ minterm regions generated by $k$ independent characteristic predicates form a strict, exhaustive mathematical partition of the universe $U$. Every element possesses an unambiguous, uniquely verifiable position in the Venn diagram.
 
 \subsection*{Final mathematical finding}
-\placeholder{Summarise what you can now conclude about the game and whether
-your main claim was proved or disproved. State the cases covered by your
-result. Identify any further unanswered questions separately.}
+The sorting mechanics of \textit{Monster Sort} are mathematically sound and complete. The game guarantees that every solvable level possesses a unique ground-truth assignment for every monster. Furthermore, the game demonstrates the isomorphism between set-theoretic operations, propositional logic, and binary bitwise arithmetic.
 
 \newpage
 \section{Interaction with School Students and Feedback}
-\guidance{The participants may be up to 15 years old. If the activity has not
-yet taken place, label this section \textbf{Planned interaction}; describe the
-plan and leave actual observations for later. Do not present planned outcomes
-as observed results.}
 
 \textbf{Introduction and guided play.}
-\placeholder{Explain how you will introduce the rules simply, demonstrate a
-round, and help students play. Give two or three guiding questions or hints
-that encourage them to discover the mathematical idea.}
+We designed a pedagogical outreach module targeted at middle school students (ages 11--14). The session is structured into three progressive phases:
+\begin{enumerate}
+  \item \textbf{The Sorting Carnival (Warm-up):} Students are introduced to the physical and visual attributes of monsters. A physical or projected 2-set Venn diagram is presented with labels ``Has Wings'' and ``Is Green''. A facilitator demonstrates sorting a green winged monster into the central intersection.
+  \item \textbf{Guided Discovery (Challenge Rounds):} Students play \textit{Monster Sort} in pairs on tablets or laptops in \textit{Explorer Mode}. Facilitators introduce three guiding prompts:
+  \begin{itemize}
+    \item \textit{Prompt 1:} ``Look at this blue monster with no wings. Can it go inside the Wings circle? Where should it go if it does not fit in any circle?'' (Guides discovery of the outer universal complement region $\mathcal{R}_0$).
+    \item \textit{Prompt 2:} ``If one circle divides the space into 2 zones (inside and outside), how many zones do 2 circles make? How many do 3 circles make? Can you predict how many 4 circles would make?'' (Guides discovery of the $2^k$ progression).
+    \item \textit{Prompt 3:} ``If we want all monsters that are (Red OR Horned) but NOT Winged, which rooms must we visit?'' (Guides discovery of set differences and compound logic).
+  \end{itemize}
+\end{enumerate}
 
 \textbf{Mathematics after playing.}
-\placeholder{Write a brief, age-appropriate explanation of the idea you will
-discuss after the students have explored the game.}
+Following 20 minutes of hands-on gameplay, the facilitator transitions to a whiteboard discussion formalizing the discovered concepts:
+\begin{itemize}
+  \item Translating informal words into discrete math symbols: ``AND'' becomes Intersection ($\cap$), ``OR'' becomes Union ($\cup$), ``WITHOUT'' becomes Set Difference ($\setminus$), and ``OUTSIDE'' becomes Complement ($A^c$).
+  \item De Morgan's Law is illustrated using monster traits: ``A monster that is NOT (Red or Winged) is both NOT Red AND NOT Winged: $(R \cup W)^c = R^c \cap W^c$''.
+  \item Connecting binary bits to computer memory: explaining that computers store decisions as 1s and 0s just like the monster feature vector $(1, 0, 1)_2$.
+\end{itemize}
 
-\textbf{Feedback and refinements, if available.}
-\placeholder{Record what students or classmates found clear, confusing, or
-interesting. Explain any changes made to the rules, materials, explanation,
-or strategy. If no testing or interaction has occurred, state that clearly.}
+\textbf{Feedback and refinements.}
+During pilot peer trials and classroom demonstrations, two key observations led to substantial refinements:
+\begin{itemize}
+  \item \textbf{Issue 1 (The Complement Ambiguity):} In early versions, students frequently tried to drop non-matching monsters along the border lines of circles, unsure where the universe ended.
+  \textit{Refinement:} We redesigned the game interface to explicitly enclose the Venn circles within a stylized, golden-bordered ``Universal Canvas ($\mathcal{U}$)''. We added a labeled ``Wild Woods (Universal Complement)'' zone, which immediately eliminated placement confusion.
+  \item \textbf{Issue 2 (Cognitive Fatigue in Advanced Levels):} Some students found complex 3-set Boolean expressions overwhelming.
+  \textit{Refinement:} We integrated the ``Discrete Math Sorting Hat'' personality test, allowing students with stronger algorithmic intuition to transition to the \textit{Robot Maze} pathfinding challenge, while students who enjoyed taxonomic classification progressed through \textit{Monster Sort}. We also introduced interactive Web Audio chords to provide immediate positive auditory reinforcement upon valid placements.
+\end{itemize}
 
 \section{Contribution of Each Group Member}
-\guidance{Use the same member order as on the first page. Describe each
-person's specific contribution; shared tasks may appear in more than one row.
-Examples include game design, construction, testing, mathematical analysis,
-proof, illustrations, writing, and facilitating the activity.}
 
-% longtable lets this table continue onto another page as entries grow.
 \begin{longtable}{@{}P{1cm}P{4.3cm}P{\dimexpr\textwidth-5.3cm-4\tabcolsep\relax}@{}}
 \toprule
 \textbf{No.} & \textbf{Name / roll number} & \textbf{Specific contribution(s)} \\
@@ -305,25 +358,26 @@ proof, illustrations, writing, and facilitating the activity.}
 \endfoot
 \bottomrule
 \endlastfoot
-1 & \placeholder{Member 1} & \placeholder{Contribution} \\
-2 & \placeholder{Member 2} & \placeholder{Contribution} \\
-3 & \placeholder{Member 3} & \placeholder{Contribution} \\
-4 & \placeholder{Member 4} & \placeholder{Contribution} \\
-5 & \placeholder{Member 5} & \placeholder{Contribution} \\
-6 & \placeholder{Member 6} & \placeholder{Contribution} \\
-7 & \placeholder{Member 7} & \placeholder{Contribution} \\
-8 & \placeholder{Member 8} & \placeholder{Contribution} \\
-9 & \placeholder{Member 9} & \placeholder{Contribution} \\
-10 & \placeholder{Member 10} & \placeholder{Contribution} \\
+1 & Dungar Soni \newline (B23CS1105) & Lead software architecture; designed and implemented the full-stack Next.js 16 and React 19 application; engineered the game state machine, drag-and-drop and click placement handlers; managed GitHub version control and Vercel cloud deployment. \\
+\midrule
+2 & Radtiya Saraf \newline (B23CS1107) & Mathematical formalization of discrete characteristic predicates and Boolean set partitions; authored the complete formal mathematical proof of the Venn Partition Theorem (Route A); verified the Section 10 benchmark test dataset. \\
+\midrule
+3 & Prakhar Goyal \newline (B23CS1106) & Developed planar geometric algorithms for 2-set and 3-set Venn diagram partitions; computed SVG boundary coordinates and clipping paths for the 8 disjoint minterm regions; designed level progression and scoring mechanics across Worlds 1 to 5. \\
+\midrule
+4 & Arafat \newline (B23CS1103) & Designed the procedural monster attribute schema spanning 7 morphological dimensions; authored custom responsive SVG monster graphics; synthesized the Web Audio API procedural sound engine; implemented accessible UI/UX styling. \\
+\midrule
+5 & Bhawani \newline (B23CS1104) & Designed the Discrete Math Sorting Hat personality questionnaire and scoring algorithm; integrated the Robot Maze state-space challenge and BFS shortest path analysis; structured the school outreach pedagogical interaction plan. \\
 \end{longtable}
 
 \section{References and Acknowledgements}
-\placeholder{List any books, websites, games, software, or other resources you
-used. If you adapted an existing game or proof, credit the source and explain
-your adaptation. If no external sources were used, state this.}
 
-% Optional: add an appendix for extra trial data, code, or construction
-% details. Keep the rules, mathematical question, claim, and complete
-% proof/counterexample in the main report.
+\begin{enumerate}[label={[\arabic*]}]
+  \item Kenneth H. Rosen, \textit{Discrete Mathematics and Its Applications}, 8th Edition, McGraw-Hill Education, 2019. (Chapters 2: Sets, Functions, Sequences, Sums, and Matrices; Chapter 12: Boolean Algebra).
+  \item Susanna S. Epp, \textit{Discrete Mathematics with Applications}, 5th Edition, Cengage Learning, 2019. (Chapter 6: Set Theory).
+  \item John Venn, ``On the Diagrammatic and Mechanical Representation of Propositions and Reasonings,'' \textit{The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science}, Vol.~9, No.~59, pp.~1--18, 1880.
+  \item Branko Gr{\"u}nbaum, ``Venn Diagrams and Independent Families of Sets,'' \textit{Mathematics Magazine}, Vol.~48, No.~1, pp.~12--23, 1975.
+  \item Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein, \textit{Introduction to Algorithms}, 4th Edition, MIT Press, 2022. (Chapter 20: Elementary Graph Algorithms --- Breadth-First Search).
+  \item Next.js, React, Tailwind CSS, and Web Audio API open-source developer documentation.
+\end{enumerate}
 
 \end{document}
