@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   LevelConfig,
   Monster,
@@ -24,12 +24,17 @@ import {
   VolumeX,
   CheckCircle2,
   AlertCircle,
+  Clock,
+  GraduationCap,
+  Compass,
 } from 'lucide-react';
 
 interface GameplayScreenProps {
   level: LevelConfig;
   soundEnabled: boolean;
+  difficultyMode?: 'explorer' | 'scholar';
   onToggleSound: () => void;
+  onToggleDifficulty?: () => void;
   onBackToMap: () => void;
   onLevelComplete: (stats: {
     score: number;
@@ -44,7 +49,9 @@ interface GameplayScreenProps {
 export const GameplayScreen: React.FC<GameplayScreenProps> = ({
   level,
   soundEnabled,
+  difficultyMode = 'explorer',
   onToggleSound,
+  onToggleDifficulty,
   onBackToMap,
   onLevelComplete,
 }) => {
@@ -55,6 +62,28 @@ export const GameplayScreen: React.FC<GameplayScreenProps> = ({
   // Stats tracking for scoring
   const [incorrectAttempts, setIncorrectAttempts] = useState(0);
   const [hintsUsed, setHintsUsed] = useState(0);
+
+  // Timer engine
+  const [elapsedSeconds, setElapsedSeconds] = useState(0);
+  const [isLevelFinished, setIsLevelFinished] = useState(false);
+
+  // Clock tick interval
+  useEffect(() => {
+    if (isLevelFinished) return;
+    const interval = setInterval(() => {
+      setElapsedSeconds((prev) => prev + 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [isLevelFinished]);
+
+  const formatTimer = (sec: number) => {
+    const mins = Math.floor(sec / 60);
+    const s = sec % 60;
+    return `${mins.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+  };
+
+  // Live Scholar Score: S = max(0, 1000 - 10t - 50m)
+  const currentScholarScore = Math.max(0, 1000 - 10 * elapsedSeconds - 50 * incorrectAttempts);
 
   // Professor Blob message and mood
   const [blobMessage, setBlobMessage] = useState(level.storyTip);
@@ -105,12 +134,15 @@ export const GameplayScreen: React.FC<GameplayScreenProps> = ({
 
       // Check level completion
       if (checkLevelCompletion(level, newPlacements)) {
+        setIsLevelFinished(true);
         setTimeout(() => {
           const finalScore = calculateLevelScore({
             totalMonsters: level.monsters.length,
             correctPlacements: level.monsters.length,
             incorrectAttempts: incorrectAttempts,
             hintsUsed: hintsUsed,
+            difficultyMode: difficultyMode,
+            elapsedSeconds: elapsedSeconds,
           });
 
           onLevelComplete({
@@ -174,6 +206,8 @@ export const GameplayScreen: React.FC<GameplayScreenProps> = ({
     setBlobMessage(level.storyTip);
     setBlobMood('explaining');
     setFeedback(null);
+    setElapsedSeconds(0);
+    setIsLevelFinished(false);
   };
 
   // Remaining monsters in tray (unplaced)
@@ -273,6 +307,112 @@ export const GameplayScreen: React.FC<GameplayScreenProps> = ({
           </button>
         </div>
       </header>
+
+      {/* SCHOLAR / EXPLORER STATUS & LIVE TIMER HUD */}
+      <div className="max-w-6xl w-full mx-auto mb-3">
+        {difficultyMode === 'scholar' ? (
+          <div className="bg-gradient-to-r from-amber-500/10 via-purple-500/15 to-indigo-500/10 dark:from-amber-950/40 dark:via-purple-950/50 dark:to-indigo-950/40 border-2 border-amber-400/80 dark:border-amber-500/60 rounded-2xl p-3 shadow-md backdrop-blur-md flex flex-wrap items-center justify-between gap-3 animate-fadeIn">
+            {/* Left: Mode Badge & Live Formula */}
+            <div className="flex items-center gap-2.5">
+              <div className="p-2 rounded-xl bg-amber-500 text-white shadow-md animate-pulse">
+                <GraduationCap className="w-5 h-5" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-black uppercase tracking-wider text-amber-700 dark:text-amber-300">
+                    🎓 Scholar Mode Active
+                  </span>
+                  <span className="hidden sm:inline-block px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-900/60 text-[10px] font-mono font-bold text-purple-700 dark:text-purple-300">
+                    Formal Logic: ∈, ∩, ∪, ∖, Aᶜ
+                  </span>
+                </div>
+                <div className="text-xs font-mono font-bold text-slate-700 dark:text-slate-200">
+                  Formula: <span className="text-amber-600 dark:text-amber-400 font-black">S = max(0, 1000 - 10t - 50m)</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Center: Live Timer and Score */}
+            <div className="flex items-center gap-3">
+              {/* Timer Box */}
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/90 dark:bg-slate-900/90 border border-amber-300 dark:border-amber-600 shadow-sm">
+                <Clock className="w-4 h-4 text-amber-600 dark:text-amber-400" />
+                <div className="text-right">
+                  <div className="text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 leading-none">
+                    Timer (t)
+                  </div>
+                  <div className="text-base font-black font-mono text-amber-600 dark:text-amber-400 leading-none">
+                    {formatTimer(elapsedSeconds)} <span className="text-xs font-normal">({elapsedSeconds}s)</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Live Score Box */}
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/90 dark:bg-slate-900/90 border border-purple-300 dark:border-purple-600 shadow-sm">
+                <div className="text-right">
+                  <div className="text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 leading-none">
+                    Live Score (S)
+                  </div>
+                  <div className="text-base font-black font-mono text-purple-600 dark:text-purple-300 leading-none">
+                    {currentScholarScore} <span className="text-xs font-normal">pts</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Deductions Breakdown & Mode Switch */}
+            <div className="flex items-center gap-2">
+              <div className="hidden md:flex flex-col text-right text-[11px] font-mono text-slate-600 dark:text-slate-300 leading-tight">
+                <span>Time Penalty: <strong className="text-rose-600">-{elapsedSeconds * 10}</strong></span>
+                <span>Error Penalty: <strong className="text-rose-600">-{incorrectAttempts * 50}</strong> ({incorrectAttempts} err)</span>
+              </div>
+              {onToggleDifficulty && (
+                <button
+                  onClick={() => {
+                    soundEffects.playClick();
+                    onToggleDifficulty();
+                  }}
+                  className="px-2.5 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white/80 dark:bg-slate-800 text-[11px] font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-750 transition-colors flex items-center gap-1"
+                  title="Switch to untimed Explorer Mode"
+                >
+                  <Compass className="w-3.5 h-3.5 text-blue-500" />
+                  <span className="hidden sm:inline">Switch to</span> Explorer
+                </button>
+              )}
+            </div>
+          </div>
+        ) : (
+          <div className="bg-gradient-to-r from-blue-500/10 via-teal-500/10 to-indigo-500/10 dark:from-blue-950/30 dark:via-teal-950/30 dark:to-indigo-950/30 border border-blue-200 dark:border-blue-800/60 rounded-2xl px-3.5 py-2 shadow-sm backdrop-blur-md flex flex-wrap items-center justify-between gap-2 text-xs">
+            <div className="flex items-center gap-2 text-slate-700 dark:text-slate-200 font-semibold">
+              <div className="p-1.5 rounded-lg bg-blue-500 text-white">
+                <Compass className="w-4 h-4" />
+              </div>
+              <div>
+                <span className="font-bold text-blue-700 dark:text-blue-300">🧭 Explorer Mode:</span>{' '}
+                Untimed & Free Practice • Explore Venn regions freely without time penalties!
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-[11px] text-slate-500 dark:text-slate-400 font-mono hidden sm:inline">
+                Session: {formatTimer(elapsedSeconds)}
+              </span>
+              {onToggleDifficulty && (
+                <button
+                  onClick={() => {
+                    soundEffects.playClick();
+                    onToggleDifficulty();
+                  }}
+                  className="px-2.5 py-1 rounded-xl border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/60 text-[11px] font-bold text-amber-800 dark:text-amber-200 hover:bg-amber-100 transition-colors flex items-center gap-1"
+                  title="Switch to timed Scholar Mode with formal notation & scoring challenge"
+                >
+                  <GraduationCap className="w-3.5 h-3.5 text-amber-600" />
+                  <span>Enable Scholar Mode (Timed)</span>
+                </button>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
 
       {/* MISSION & PROFESSOR BLOB INSTRUCTION BANNER */}
       <div className="max-w-6xl w-full mx-auto mb-3">

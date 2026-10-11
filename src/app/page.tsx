@@ -240,7 +240,9 @@ export default function DiscreteMathAdventureApp() {
           key={activeLevelId}
           level={currentLevelConfig}
           soundEnabled={progress.soundEnabled}
+          difficultyMode={progress.difficultyMode}
           onToggleSound={handleToggleSound}
+          onToggleDifficulty={handleToggleDifficulty}
           onBackToMap={() => {
             setCompletedLevelStats(null);
             setCurrentScreen('map');

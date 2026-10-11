@@ -110,6 +110,39 @@ describe('Game Engine & Mechanics Tests', () => {
       hintsUsed: 4,
     });
     expect(struggling.stars).toBe(1);
+
+    // Scholar Mode formula: S = max(0, 1000 - 10t - 50m)
+    const scholarFast = calculateLevelScore({
+      totalMonsters: 6,
+      correctPlacements: 6,
+      incorrectAttempts: 1, // m = 1
+      hintsUsed: 0,
+      difficultyMode: 'scholar',
+      elapsedSeconds: 20, // t = 20 -> 1000 - 200 - 50 = 750
+    });
+    expect(scholarFast.score).toBe(750);
+    expect(scholarFast.stars).toBe(3);
+
+    const scholarSlow = calculateLevelScore({
+      totalMonsters: 6,
+      correctPlacements: 6,
+      incorrectAttempts: 4, // m = 4
+      hintsUsed: 0,
+      difficultyMode: 'scholar',
+      elapsedSeconds: 50, // t = 50 -> 1000 - 500 - 200 = 300
+    });
+    expect(scholarSlow.score).toBe(300);
+    expect(scholarSlow.stars).toBe(1);
+
+    const scholarFloor = calculateLevelScore({
+      totalMonsters: 6,
+      correctPlacements: 6,
+      incorrectAttempts: 10,
+      hintsUsed: 0,
+      difficultyMode: 'scholar',
+      elapsedSeconds: 120, // 1000 - 1200 - 500 = -700 -> max(0, -700) = 0
+    });
+    expect(scholarFloor.score).toBe(0);
   });
 
   it('records level completion and handles world unlocks and badges', () => {
